@@ -7,13 +7,13 @@ using Clustering
 using Images
 using Random
 using Distributions
-using LightGraphs
-using LightGraphs.LinAlg
+using Graphs
+using Graphs.LinAlg
 using SparseArrays
 using ArnoldiMethod
 
 
-import LightGraphs.LinAlg:adjacency_matrix
+import Graphs.LinAlg:adjacency_matrix
 number_of_vertices = 5
 Random.seed!(0)
 
@@ -127,7 +127,7 @@ end
                                     NormalizedAdjacency(
                                         CombinatorialAdjacency(
                                             adjacency_matrix(graph, dir=:both))))
-        (vals, V) = LightGraphs.eigs(sparse(normalized_laplacian),
+        (vals, V) = Graphs.eigs(sparse(normalized_laplacian),
                                     nev=min(5 + 10, size(normalized_laplacian, 1)),
                                     which=SR(),
                                     tol=1e-20,

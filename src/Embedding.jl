@@ -4,8 +4,8 @@ export embedding,
        YuShiPopout,
        PartialGroupingConstraints
 
-using LightGraphs
-using LightGraphs.LinAlg
+using Graphs
+using Graphs.LinAlg
 using ArnoldiMethod
 using LinearAlgebra
 using Arpack
@@ -85,7 +85,7 @@ function embedding(cfg::NgLaplacian, L::AbstractMatrix)
         end
         return vec
     end
-    (vals, vec) = LightGraphs.eigs(L,
+    (vals, vec) = Graphs.eigs(L,
                                    nev = cfg.nev,
                                    which = LM(),
                                    tol=1e-30,
@@ -215,7 +215,7 @@ function embedding(cfg::PartialGroupingConstraints, L::NormalizedAdjacency, rest
     DU = sparse(spdiagm(0=>prescalefactor(L)) * U)
     F = svds(DU, nsv=size(U, 2)-1)[1]
     AAt = sparse(F.U)*sparse(F.U)'
-    (eigvals, eigvec) = LightGraphs.eigs(PGCMatrix(L, AAt), nev = cfg.nev, which = LM())
+    (eigvals, eigvec) = Graphs.eigs(PGCMatrix(L, AAt), nev = cfg.nev, which = LM())
     eigvec = real(eigvec)
     V = spdiagm(0=>prescalefactor(L)) * eigvec
     if cfg.normalize
@@ -334,7 +334,7 @@ the cfg.nev eigenvectors associated with the non-zero smallest
 eigenvalues.
 """
 function embedding(cfg::ShiMalikLaplacian, L::NormalizedLaplacian)
-    (vals, V) = LightGraphs.eigs(sparse(L),
+    (vals, V) = Graphs.eigs(sparse(L),
                                  nev=min(cfg.nev + 10, size(L, 1)),
                                  which = SR(),
                                  tol=1e-20,

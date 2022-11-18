@@ -1,5 +1,5 @@
 using Clustering,
-    LightGraphs,
+    Graphs,
     SparseArrays,
     LinearAlgebra,
     Arpack
