@@ -1,4 +1,4 @@
-import LightGraphs.LinAlg: adjacency_matrix
+import Graphs.LinAlg: adjacency_matrix
 
 """
     adjacency_matrix(g[, T=Int; dir=:out])

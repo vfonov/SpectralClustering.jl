@@ -11,9 +11,9 @@ export
        cycles,
     number_of_neighbors
 
-using LightGraphs
+using Graphs
 
-import LightGraphs: nv, ne, has_edge, is_directed
+import Graphs: nv, ne, has_edge, is_directed
 
 import Base.length
 import Base.empty!
