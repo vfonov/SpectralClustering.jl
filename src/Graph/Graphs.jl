@@ -24,7 +24,7 @@ type Edge
 ```
 
 """
-mutable struct Edge{T}
+mutable struct Edge{T} <: Graphs.AbstractEdge{Int}
   next_v1::Union{Nothing,Edge{T}}
   prev_v1::Union{Nothing,Edge{T}}
   next_v2::Union{Nothing,Edge{T}}
@@ -54,7 +54,7 @@ end
 function Edge(v1::Vertex,v2::Vertex,w::Number)
     return Edge{weight_type(v1)}(nothing,nothing,nothing,nothing,v1,v2,convert(weight_type(v1),w))
 end
-struct Graph
+struct Graph <: Graphs.AbstractGraph{Int}
   vertices::Vector{Vertex}
   is_dirty::Bool
 end
